@@ -2428,14 +2428,50 @@ require("./styles.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log((0, _menu.default)(_menu2.default[1]));
 var menuRef = document.querySelector('.js-menu');
+var inputRef = document.querySelector('#theme-switch-toggle');
+var bodyRef = document.querySelector('body');
 var markUpMenu = makeMarkupMenu(_menu2.default);
 menuRef.insertAdjacentHTML('beforeend', markUpMenu);
 
 function makeMarkupMenu(menuElements) {
   return (0, _menu.default)(menuElements);
 }
+
+var Theme = {
+  LIGHT: 'light-theme',
+  DARK: 'dark-theme'
+};
+inputRef.addEventListener('change', onInputChange);
+
+function onInputChange() {
+  if (inputRef.checked) {
+    bodyRef.classList.add(Theme.DARK);
+    localStorage.setItem('theme', JSON.stringify(Theme.DARK));
+  } else {
+    bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);
+    localStorage.setItem('theme', JSON.stringify(Theme.LIGHT));
+  }
+}
+
+var savedTheme = localStorage.getItem('theme');
+var parsedSavedTheme = JSON.parse(savedTheme);
+
+var keepOfTheme = function keepOfTheme() {
+  if (savedTheme) {
+    bodyRef.classList.add(parsedSavedTheme);
+  }
+};
+
+keepOfTheme();
+
+function savePositionOfCheckbox() {
+  if (parsedSavedTheme === Theme.DARK) {
+    inputRef.checked = true;
+  }
+}
+
+savePositionOfCheckbox();
 },{"./menu.hbs":"menu.hbs","./menu.json":"menu.json","./styles.css":"styles.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -2464,7 +2500,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50243" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49980" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
