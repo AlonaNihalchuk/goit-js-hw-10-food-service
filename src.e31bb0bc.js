@@ -2431,13 +2431,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var menuRef = document.querySelector('.js-menu');
 var inputRef = document.querySelector('#theme-switch-toggle');
 var bodyRef = document.querySelector('body');
-var markUpMenu = makeMarkupMenu(_menu2.default);
+var markUpMenu = (0, _menu.default)(_menu2.default);
 menuRef.insertAdjacentHTML('beforeend', markUpMenu);
-
-function makeMarkupMenu(menuElements) {
-  return (0, _menu.default)(menuElements);
-}
-
 var Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme'
@@ -2446,11 +2441,12 @@ inputRef.addEventListener('change', onInputChange);
 
 function onInputChange() {
   if (inputRef.checked) {
+    bodyRef.classList.remove(Theme.LIGHT);
     bodyRef.classList.add(Theme.DARK);
-    localStorage.setItem('theme', JSON.stringify(Theme.DARK));
+    localStorage.setItem('theme', Theme.DARK);
   } else {
     bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);
-    localStorage.setItem('theme', JSON.stringify(Theme.LIGHT));
+    localStorage.setItem('theme', Theme.LIGHT);
   }
 }
 
@@ -2500,7 +2496,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49980" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50918" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
