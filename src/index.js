@@ -6,13 +6,9 @@ const menuRef = document.querySelector('.js-menu');
 const inputRef = document.querySelector('#theme-switch-toggle');
 const bodyRef = document.querySelector('body');
 
-const markUpMenu = makeMarkupMenu(menuElements);
+const markUpMenu = menuElementTpl(menuElements);
 
 menuRef.insertAdjacentHTML('beforeend', markUpMenu);
-
-function makeMarkupMenu(menuElements) {
-  return menuElementTpl(menuElements);
-}
 
 const Theme = {
   LIGHT: 'light-theme',
@@ -23,11 +19,12 @@ inputRef.addEventListener('change', onInputChange);
 
 function onInputChange() {
   if (inputRef.checked) {
+    bodyRef.classList.remove(Theme.LIGHT);
     bodyRef.classList.add(Theme.DARK);
-    localStorage.setItem('theme', JSON.stringify(Theme.DARK));
+    localStorage.setItem('theme', Theme.DARK);
   } else {
     bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);
-    localStorage.setItem('theme', JSON.stringify(Theme.LIGHT));
+    localStorage.setItem('theme', Theme.LIGHT);
   }
 }
 
