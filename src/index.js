@@ -6,6 +6,8 @@ const menuRef = document.querySelector('.js-menu');
 const inputRef = document.querySelector('#theme-switch-toggle');
 const bodyRef = document.querySelector('body');
 
+keepOfTheme();
+
 const markUpMenu = menuElementTpl(menuElements);
 
 menuRef.insertAdjacentHTML('beforeend', markUpMenu);
@@ -29,20 +31,21 @@ function onInputChange() {
 }
 
 const savedTheme = localStorage.getItem('theme');
-const parsedSavedTheme = JSON.parse(savedTheme);
+// const parsedSavedTheme = JSON.parse(savedTheme);
 
 const keepOfTheme = () => {
   if (savedTheme) {
-    bodyRef.classList.add(parsedSavedTheme);
+    inputRef.value = savedTheme;
+  }
+  if (savedTheme === Theme.DARK) {
+    inputRef.checked = true;
   }
 };
 
-keepOfTheme();
+// function savePositionOfCheckbox() {
+//   if (parsedSavedTheme === Theme.DARK) {
+//     inputRef.checked = true;
+//   }
+// }
 
-function savePositionOfCheckbox() {
-  if (parsedSavedTheme === Theme.DARK) {
-    inputRef.checked = true;
-  }
-}
-
-savePositionOfCheckbox();
+// savePositionOfCheckbox();
