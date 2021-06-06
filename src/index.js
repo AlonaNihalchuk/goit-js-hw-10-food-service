@@ -29,18 +29,18 @@ function onInputChange() {
 }
 
 const savedTheme = localStorage.getItem('theme');
-// const parsedSavedTheme = JSON.parse(savedTheme);
+const parsedSavedTheme = JSON.parse(savedTheme);
 
 const keepOfTheme = () => {
   if (savedTheme) {
-    bodyRef.classList.add(savedTheme);
+    bodyRef.classList.add(parsedSavedTheme);
   }
 };
 
 keepOfTheme();
 
 function savePositionOfCheckbox() {
-  if (savedTheme === Theme.DARK) {
+  if (parsedSavedTheme === Theme.DARK) {
     inputRef.checked = true;
   }
 }
